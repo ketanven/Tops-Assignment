@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery Sliding Animations</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background-color: lightblue;
+      margin: 20px;
+      text-align: center;
+      line-height: 200px;
+      display: none; /* Hide initially */
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Slide Down Animation
+      $("#btnSlideDown").click(function() {
+        $("#box").slideDown("slow");
+      });
+
+      // Slide Up Animation
+      $("#btnSlideUp").click(function() {
+        $("#box").slideUp("slow");
+      });
+
+      // Slide Toggle Animation
+      $("#btnSlideToggle").click(function() {
+        $("#box").slideToggle("slow");
+      });
+
+      // Custom Animation with animate()
+      $("#btnCustomAnimation").click(function() {
+        $("#box").animate({
+          width: "toggle",
+          height: "toggle",
+          opacity: "toggle"
+        }, "slow");
+      });
+    });
+  </script>
+</head>
+<body>
+
+<button id="btnSlideDown">Slide Down</button>
+<button id="btnSlideUp">Slide Up</button>
+<button id="btnSlideToggle">Slide Toggle</button>
+<button id="btnCustomAnimation">Custom Animation</button>
+
+<div id="box">Hello, I'm sliding!</div>
+
+</body>
+</html>
