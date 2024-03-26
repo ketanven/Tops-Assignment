@@ -1,0 +1,50 @@
+<!-- Q.43 Write a JavaScript program to convert an array of objects into CSV string? -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Data</title>
+</head>
+<body>
+    <pre id="output"></pre> <!-- Add a pre tag with ID "output" -->
+</body>
+<script>
+    function convertArrayOfObjectsToCSV(data) {
+        // Extract column headers from the keys of the first object
+        const headers = Object.keys(data[0]);
+
+        // Create CSV string with headers
+        let csv = headers.join(',') + '\n';
+
+        // Iterate through each object in the array
+        data.forEach(obj => {
+            // Extract values from the object and concatenate with commas
+            const values = headers.map(header => {
+                // Check if the value needs to be enclosed in quotes
+                const needsQuotes = typeof obj[header] === 'string' && obj[header].includes(',');
+                // If yes, enclose in double quotes and escape any existing double quotes
+                return needsQuotes ? `"${obj[header].replace(/"/g, '""')}"` : obj[header];
+            });
+            // Concatenate values with commas and append to CSV string
+            csv += values.join(',') + '\n';
+        });
+
+        return csv;
+    }
+
+    // Example array of objects
+    const data = [
+        { name: 'John', age: 30, city: 'New York' },
+        { name: 'Alice', age: 25, city: 'Los Angeles' },
+        { name: 'Bob', age: 35, city: 'Chicago' }
+    ];
+
+    // Convert array of objects to CSV string
+    const csvString = convertArrayOfObjectsToCSV(data);
+
+    // Display the result in the pre tag
+    document.getElementById("output").innerText = csvString;
+</script>
+</html>

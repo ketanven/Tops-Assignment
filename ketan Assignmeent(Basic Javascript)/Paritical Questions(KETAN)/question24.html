@@ -1,0 +1,33 @@
+// Q.24 Write to check whether a number is negative, positive or zero?
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Check</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    function checkNumber(num) {
+        if (num > 0) {
+            return "Positive";
+        } else if (num < 0) {
+            return "Negative";
+        } else {
+            return "Zero";
+        }
+    }
+
+    // Test the function and store the results
+    const outputText = checkNumber(5) + "<br>" +
+                       checkNumber(-3) + "<br>" +
+                       checkNumber(0);
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = outputText;
+</script>
+</html>

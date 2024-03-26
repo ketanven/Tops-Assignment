@@ -1,0 +1,27 @@
+<!-- Q.19 What is the use of is Nan function? -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Check</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    let myValue = "Hello";
+    let outputText = ""; // Initialize an empty string to store the output
+
+    if (isNaN(myValue)) {
+        outputText = "The value is not a number or cannot be converted to one.";
+    } else {
+        outputText = "The value is a valid number.";
+    }
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = outputText;
+</script>
+</html>

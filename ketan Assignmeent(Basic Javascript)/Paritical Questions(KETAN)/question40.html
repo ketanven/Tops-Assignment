@@ -1,0 +1,48 @@
+// Q.40 Write a JavaScript Program to display the current day and time in the following format.
+// Sample Output: Today is Friday. Current Time is 12 PM: 12 : 22 2 ?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Date and Time</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    function getCurrentDateTime() {
+        // Array of weekday names
+        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        // Get current date and time
+        let currentDate = new Date();
+
+        // Get day of the week
+        let dayOfWeek = weekdays[currentDate.getDay()];
+
+        // Get hours, minutes, and AM/PM
+        let hours = currentDate.getHours();
+        let minutes = currentDate.getMinutes();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+
+        // Convert hours to 12-hour format
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Handle midnight
+
+        // Add leading zero to minutes if less than 10
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        // Construct the formatted string
+        let formattedDateTime = "Today is " + dayOfWeek + ". Current Time is " + hours + " " + ampm + ": " + minutes + " : " + currentDate.getSeconds() + " " + currentDate.getTimezoneOffset() / -60;
+
+        return formattedDateTime;
+    }
+
+    // Get the formatted date and time
+    const dateTime = getCurrentDateTime();
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = dateTime;
+</script>
+</html>

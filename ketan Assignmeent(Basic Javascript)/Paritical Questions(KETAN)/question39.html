@@ -1,0 +1,59 @@
+//Q.39 Accept 3 numbers from user using while loop and check each numbers palindrome?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Check</title>
+</head>
+<body>
+    <h2 id="output"></h2> <!-- Add an h2 tag with ID "output" -->
+</body>
+<script>
+    function isPalindrome(num) {
+        const originalNum = num;
+        let reversedNum = 0;
+
+        while (num > 0) {
+            const digit = num % 10;
+            reversedNum = (reversedNum * 10) + digit;
+            num = Math.floor(num / 10);
+        }
+
+        return originalNum === reversedNum;
+    }
+
+    // Function to accept input from the user
+    function getUserInput() {
+        let numbers = [];
+        let i = 0;
+
+        while (i < 3) {
+            const input = parseInt(prompt("Enter number " + (i + 1) + " :"));
+            if (!isNaN(input)) {
+                numbers.push(input);
+                i++;
+            } else {
+                alert("Invalid input. Please enter a number.");
+            }
+        }
+        return numbers;
+    }
+
+    const inputNumbers = getUserInput();
+
+    let outputText = ""; // Initialize an empty string to store the output
+
+    // Check if each input number is a palindrome
+    inputNumbers.forEach((number, index) => {
+        if (isPalindrome(number)) {
+            outputText += "Number " + number + " is a palindrome.<br>";
+        } else {
+            outputText += "Number " + number + " is not a palindrome.<br>";
+        }
+    });
+
+    // Output the result in the h2 tag
+    document.getElementById("output").innerHTML = outputText;
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!-- Q.42 Write a JavaScript program to compare two objects? -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Objects</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    function compareObjects(obj1, obj2) {
+        // Get the keys of both objects
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+
+        // If number of keys is different, objects are not equal
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+
+        // Iterate through keys and compare the values
+        for (let key of keys1) {
+            // If the value of a key is different, objects are not equal
+            if (obj1[key] !== obj2[key]) {
+                return false;
+            }
+        }
+
+        // If all key-value pairs match, objects are equal
+        return true;
+    }
+
+    // Example objects for testing
+    const obj1 = { a: 1, b: 2, c: 3 };
+    const obj2 = { a: 1, b: 2, c: 3 };
+    const obj3 = { a: 1, b: 2, c: 4 };
+
+    // Test the function
+    const output1 = compareObjects(obj1, obj2); // true
+    const output2 = compareObjects(obj1, obj3); // false
+
+    // Output the results in the h1 tag
+    document.getElementById("output").innerHTML = `Output 1: ${output1}<br>Output 2: ${output2}`;
+</script>
+</html>

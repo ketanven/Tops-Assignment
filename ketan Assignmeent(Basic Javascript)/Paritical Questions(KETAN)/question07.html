@@ -1,0 +1,27 @@
+// Q.7 Check if typeof '10' is exactly equal to 10. If not make it exactly equal?
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="demo"></h1>
+</body>
+<script>
+
+    if (typeof '10' === 'number') {
+        // Do something if '10' is exactly equal to 10 as a number
+        document.getElementById("demo").innerHTML="'10' is exactly equal to 10 as a number.";
+    } else {
+        // Convert '10' to a number if it's not already
+        const numericValue = parseInt('10', 10); // Using parseInt to convert to a base-10 number
+        document.getElementById("demo").innerHTML="'10' is not exactly equal to 10 as a number. Converted to:", numericValue;
+    }
+
+</script>
+</html>
+
+

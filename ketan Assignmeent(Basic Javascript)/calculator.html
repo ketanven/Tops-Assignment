@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .backside {
+            border: 2px solid;
+            width: fit-content;
+            padding: 20px;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            top: 19%;
+            left: 26%;
+        }
+
+        input {
+            height: 26px;
+            width: 50%;
+            margin-left: 40px;
+        }
+
+        button {
+            height: 50px;
+            width: 30%;
+            margin-top: 10px;
+            margin-left: 2px;
+        }
+
+        .downside {
+            display: flex;
+            width: 100%;
+        }
+
+        .buttondiv {
+            height: 30%;
+            width: 50%;
+        }
+
+        .answer {
+            margin-left: 10%;
+            margin-top: 10px;
+            font-size: 19px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="backside">
+        <h1>Maths Operations</h1>
+        <h2>Enter 1st number: <input type="text" id="no1"></h2>
+        <h2>Enter 2nd number: <input type="text" id="no2"></h2>
+
+        <div class="downside">
+            <div class="buttondiv">
+                <button onclick="answer()">+</button>
+                <button onclick="answer1()">-</button>
+                <button onclick="answer2()">*</button>
+                <button onclick="answer3()">/</button>
+                <button onclick="answer4()">%</button>
+            </div>
+            <div class="answer">
+                <p>Answer: <span id="output"></span></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function answer() {
+            let a1 = Number(no1.value) + Number(no2.value);
+            document.getElementById("output").innerHTML = a1;
+        }
+
+        function answer1() {
+            let a1 = Number(no1.value) - Number(no2.value);
+            document.getElementById("output").innerHTML = a1;
+        }
+
+        function answer2() {
+            let a1 = Number(no1.value) * Number(no2.value);
+            document.getElementById("output").innerHTML = a1;
+        }
+
+        function answer3() {
+            let a1 = Number(no1.value) / Number(no2.value);
+            document.getElementById("output").innerHTML = a1;
+        }
+
+        function answer4() {
+            let a1 = Number(no1.value) % Number(no2.value);
+            document.getElementById("output").innerHTML = a1;
+        }
+    </script>
+</body>
+</html>

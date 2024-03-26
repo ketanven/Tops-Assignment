@@ -1,0 +1,35 @@
+<!-- Q.23 Find the Character Is Vowel or Not ? -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Check</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    function isVowel(char) {
+        // Convert the character to lowercase for case-insensitivity
+        const lowerChar = char.toLowerCase();
+
+        // Check if the character is a vowel
+        if (lowerChar === 'a' || lowerChar === 'e' || lowerChar === 'i' || lowerChar === 'o' || lowerChar === 'u') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Test the function and construct output text
+    const outputText = `Is 'A' a vowel? ${isVowel('A')}<br>` +
+                       `Is 'b' a vowel? ${isVowel('b')}<br>` +
+                       `Is 'e' a vowel? ${isVowel('e')}`;
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = outputText;
+</script>
+</html>

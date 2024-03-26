@@ -1,0 +1,35 @@
+<!-- Q.20 What is the difference between && and || in JavaScript? -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean Operations and Age Check</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    let result = true && false; // result is false
+    let outcome = true || false; // outcome is true
+
+    let age = 25;
+    let message = ""; // Initialize an empty string to store the message
+
+    if (age >= 18 && age <= 30) {
+        message = "You are in the eligible age range";
+    } else {
+        message = "You are not eligible";
+    }
+
+    // Construct the output string
+    let outputText = `Result of 'true && false': ${result}<br>`;
+    outputText += `Result of 'true || false': ${outcome}<br>`;
+    outputText += `${message}`;
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = outputText;
+</script>
+</html>

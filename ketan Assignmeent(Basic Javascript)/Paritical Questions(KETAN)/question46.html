@@ -1,0 +1,31 @@
+<!-- Q.46 Write a JavaScript program to clone an array? -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone Array</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    function cloneArray(array) {
+        // Use the spread operator (...) to create a shallow copy of the array
+        return [...array];
+    }
+
+    // Example array
+    const originalArray = [1, 2, 3, 4, 5];
+
+    // Clone the array
+    const clonedArray = cloneArray(originalArray);
+
+    // Modify the cloned array to demonstrate it's a separate copy
+    clonedArray.push(6);
+
+    // Output the original and cloned arrays in the h1 tag
+    document.getElementById("output").innerHTML = `Original Array: ${originalArray}<br>Cloned Array: ${clonedArray}`;
+</script>
+</html>

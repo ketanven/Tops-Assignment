@@ -1,0 +1,36 @@
+<!-- Q.14 Write a JavaScript exercise to get the extension of a filename.? -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Extension</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    function getFileExtension(filename) {
+        // Check if the filename has a dot (.) indicating an extension
+        const dotIndex = filename.lastIndexOf('.');
+
+        if (dotIndex !== -1) {
+            // Extract the extension from the filename
+            const extension = filename.slice(dotIndex + 1);
+            return extension;
+        } else {
+            // If there's no dot, consider it as having no extension
+            return "No extension found";
+        }
+    }
+
+    // Test the function
+    const exampleFilename = "example.txt";
+    const extensionResult = getFileExtension(exampleFilename);
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = `The extension of ${exampleFilename} is: ${extensionResult}`;
+</script>
+</html>

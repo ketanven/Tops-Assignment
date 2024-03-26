@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Statements Output</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    let age = 18;
+
+    if (age >= 18) {
+        document.getElementById("output").innerHTML = "You are eligible to vote";
+    } else {
+        document.getElementById("output").innerHTML = "Sorry, you are not eligible to vote";
+    }
+
+    let time = 14;
+
+    if (time < 12) {
+        document.getElementById("output").innerHTML += "<br>Good morning!";
+    } else if (time < 18) {
+        document.getElementById("output").innerHTML += "<br>Good afternoon!";
+    } else {
+        document.getElementById("output").innerHTML += "<br>Good evening!";
+    }
+</script>
+</html>

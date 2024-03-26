@@ -1,0 +1,41 @@
+<!-- Q.18 What is a Loop and Switch Case in JavaScript define that ? -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop and Switch Output</title>
+</head>
+<body>
+    <h1 id="output"></h1> <!-- Add an h1 tag with ID "output" -->
+</body>
+<script>
+    let outputText = ""; // Initialize an empty string to store the output
+
+    // Loop to print iterations
+    for (let i = 0; i < 5; i++) {
+        outputText += "Iteration: " + i + "<br>";
+    }
+
+    // Switch statement
+    let day = "Monday";
+    switch (day) {
+        case "Monday":
+            outputText += "It's the start of the week<br>";
+            break;
+        case "Wednesday":
+            outputText += "Halfway through the week<br>";
+            break;
+        case "Friday":
+            outputText += "Weekend is almost here<br>";
+            break;
+        default:
+            outputText += "It's just another day<br>";
+    }
+
+    // Output the result in the h1 tag
+    document.getElementById("output").innerHTML = outputText;
+</script>
+</html>

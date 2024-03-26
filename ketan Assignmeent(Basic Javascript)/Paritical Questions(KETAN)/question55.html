@@ -1,0 +1,73 @@
+<!-- Q.55 Form in Email, number, Password, Validation? -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm" onsubmit="return validateForm()">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span id="emailError" class="error"></span><br>
+
+        <label for="number">Number:</label>
+        <input type="number" id="number" name="number">
+        <span id="numberError" class="error"></span><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <span id="passwordError" class="error"></span><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        function validateForm() {
+            // Fetching input values
+            var email = document.getElementById('email').value;
+            var number = document.getElementById('number').value;
+            var password = document.getElementById('password').value;
+
+            // Resetting previous error messages
+            document.getElementById('emailError').innerHTML = '';
+            document.getElementById('numberError').innerHTML = '';
+            document.getElementById('passwordError').innerHTML = '';
+
+            // Validating email (should be a valid email format)
+            if (!isValidEmail(email)) {
+                document.getElementById('emailError').innerHTML = 'Invalid email format';
+                return false; // Prevent form submission
+            }
+
+            // Validating number (should be a valid number)
+            if (isNaN(number)) {
+                document.getElementById('numberError').innerHTML = 'Please enter a valid number';
+                return false; // Prevent form submission
+            }
+
+            // Validating password (should be at least 6 characters long)
+            if (password.length < 6) {
+                document.getElementById('passwordError').innerHTML = 'Password must be at least 6 characters long';
+                return false; // Prevent form submission
+            }
+
+            // If all validations pass, form submission can proceed
+            return true;
+        }
+
+        // Function to check email format
+        function isValidEmail(email) {
+            // Regular expression for validating email format
+            var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            return emailPattern.test(email);
+        }
+
+    </script>
+
+</body>
+
+</html>
