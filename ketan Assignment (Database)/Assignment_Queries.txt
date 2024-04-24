@@ -1,0 +1,344 @@
+---------------------KETAN PILLAI--------------------
+
+================DATABASE ASSIGNMENT==================
+
+ 
+1. Create Table Name:  Student and Exam
+
+1) 
+
+CREATE TABLE Student (
+    Rollno INT NOT NULL PRIMARY KEY,
+    Name VARCHAR(20) NOT NULL,
+    Branch VARCHAR(50)NOT NULL
+);
+
+INSERT INTO Student (Rollno, S_code, Name, Branch)
+VALUES
+    (1, 'Jay', 'Computer Science'),
+    (2, 'Suhani', 'Electronic and Com'),
+    (3, 'Kriti', 'Electronic and Com');
+
+_______________________________________________________
+
+2) 
+CREATE TABLE Exam (
+    Rollno INT NOT NULL,
+    S_code VARCHAR(10) NOT NULL,
+    Marks INT NOT NULL,
+    P_code VARCHAR(10)NOT NUL,
+    FOREIGN KEY (Rollno) REFERENCES Student(Rollno)
+);
+
+INSERT INTO Exam (Exam, Rollno, S_code, Marks, P_code)
+VALUES
+    (1,'CSI1',50, 'CS'),
+    (1,'CS12',60, 'CS'),
+    (2,'EC101',66, 'EC'),
+    (2,'EC102',70, 'EC'),
+    (3,'EC101',45, 'EC'),
+    (3,'EC102', 50, 'EC');
+
+________________________________________________________________
+
+
+2) Create table given below: Employee and IncentiveTable  
+
+1.
+CREATE TABLE Employees (
+    Employee_id INT,
+    First_name VARCHAR(25),
+    Last_name VARCHAR(25),
+    Salary INT,
+    Joining_date DATE,
+    Department VARCHAR(255)
+);
+
+INSERT INTO Employees (Employee_id, First_name, Last_name, 
+Salary, Joining_date, Department)
+VALUES
+ (1,"john","abraham",1000000,'01-JAN-13 12:00:00 AM',"banking"),
+(2,"micheal","clarke",800000,'01-JAN-13 12:00:00 AM',"insurance"),
+(3,"roy","thomas",700000,'01-FEB-13 12:00:00 AM',"banking"),
+(4,"tom","jose",600000,'01-FEB-13 12:00:00 AM',"insurance"),
+(5,"jerry","pinto",650000,'01-FEB-13 12:00:00 AM',"insurance"),
+(6,"philip","mathew",750000,'01-JAN-13 12:00:00 AM',"services"),
+(7,"testname1","123",650000,'01-JAN-13 12:00:00 AM',"services"),
+(8,"testname2","lname%",600000,'01-FEB-13 12:00:00 AM',"insurance");
+
+=========================================================================
+
+
+2.
+CREATE TABLE Incentive (
+    Employee_ref_id INT,
+    Incentive_date DATE,
+    Incentive_amount INT
+);
+
+INSERT INTO Incentive (Employee_ref_id, Incentive_date, 
+Incentive_amount)
+VALUES (1, '01-FEB-13', 5000),
+       (2, '01-FEB-13', 3000),
+       (3, '01-FEB-13', 4000),
+       (1, '01-JAN-13', 4500),
+       (2, '01-JAN-13', 3500);
+
+_________________________________________________________________________________
+
+
+      Query
+
+3. Get First_Name from employee table using Tom name “Employee Name”.
+ SELECT First_name
+FROM Employees
+WHERE First_name = 'Tom';
+
+
+
+________________________________________________________________________
+
+
+
+4. Get FIRST_NAME, Joining Date, and Salary from employee table.
+SELECT First_name, Incentive_date, Salary
+FROM Employees;
+
+_________________________________________________________________________
+
+
+5. Get all employee details from the employee table order by First_Name 
+SELECT *
+FROM Employees
+ORDER BY First_name ASC, Salary DESC;
+
+___________________________________________________________________________
+6. Get employee detailsfromemployee table whose first name contains ‘J’.  
+SELECT *
+FROM Employees
+WHERE First_name LIKE '%J%';
+
+___________________________________________________________________________
+
+7,8. Get department wise maximum salary from employee table order by 
+8. salaryascending?  
+
+SELECT Department, MAX(Salary) AS Max_Salary
+FROM Employees
+GROUP BY Department
+ORDER BY Max_Salary ASC;
+
+___________________________________________________________________________
+
+9. Select first_name, incentive amount from employee and incentives table 
+For those employees who have incentives and incentive amount greater than 
+3000
+
+SELECT Employees.First_name, Incentives.Incentive_amount
+FROM Employees
+JOIN Incentives ON Employees.Employee_id = 
+Incentives.Employee_ref_id
+WHERE Incentive_amount > 3000;
+
+___________________________________________________________________________
+
+10. Create After Insert trigger on Employee table which insert records in 
+Viewtable
+
+create view EmployeeView as
+select Employee_id, First_name, Last_name, Salary
+from Employees;
+
+delimiter $$
+create trigger EmployeeInsertTrigger
+after insert
+on Employee for each row
+begin
+    insert into EmployeeView (empid, firstname, lastname, salary)
+    values (new.empid, new.firstname, new.lastname, new.salary);
+end;
+$$
+delimiter ;
+
+
+___________________________________________________________________________
+
+11. Create table given below: Salesperson and Customer
+
+TABLE - 1 
+CREATE TABLE SalsePerson (
+    SNO INT PRIMARY KEY,
+    SNAME VARCHAR(255),
+    CITY VARCHAR(255),
+    COMM FLOAT
+);
+
+INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1001, 
+'Peel', 'London', 0.12);
+INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1002, 
+'Serres', 'San Jose', 0.13);
+INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1004, 
+'Motika', 'London', 0.11);
+INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1007, 
+'Rafkin', 'Barcelona', 0.15);
+INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1003, 
+'Axelrod', 'New York', 0.1); 
+
+=====================================================================
+
+
+TABLE – 2
+
+CREATE TABLE Customer (
+    CNM INT PRIMARY KEY,
+    CNAME VARCHAR(50),
+    CITY VARCHAR(50),
+    RATING INT,
+    SNO INT,
+    FOREIGN KEY (SNO) REFERENCES SalesPerson(SNO)
+);
+
+INSERT INTO Customer (CNM, CNAME, CITY, RATING, SNO)
+VALUES 
+(201, 'Hoffman', 'London', 100, 1001),
+(202, 'Giovanne', 'Roe', 200, 1003),
+(203, 'Liu', 'San Jose', 300, 1002),
+(204, 'Grass', 'Barcelona', 100, 1002),
+(206, 'Clemens', 'London', 300, 1007),
+(207, 'Pereira', 'Roe', 100, 1004);
+
+===========================================================================
+
+      Query
+
+12. Retrieve the below data from above table
+
+
+13. All orders for more than $1000.
+
+select *
+from customer
+where rating > 1000;
+
+___________________________________________________________________________
+
+14. Names and cities of all salespeople in London with commission above 
+0.12
+
+select sname, city
+from salesperson
+where city = 'london' AND comm > 0.12;
+
+___________________________________________________________________________
+
+15. All salespeople either in Barcelona or in London
+
+SELECT SNAME
+FROM SalesPerson
+WHERE CITY IN ('London', 'Barcelona');
+
+___________________________________________________________________________
+
+16. All salespeople with commission between 0.10 and 0.12. (Boundary 
+values should be excluded).
+
+SELECT SNAME
+FROM SalesPerson
+WHERE COMM > 0.10 AND COMM < 0.12;
+
+___________________________________________________________________________
+
+17. All customers excluding those with rating <= 100 unless they are located 
+in Rome
+SELECT *
+FROM Customer
+WHERE (RATING > 100 OR CITY = 'Rome');
+
+___________________________________________________________________________
+
+18. Write a SQL statement that displays all the information about all 
+Salespeople
+
+CREATE TABLE salespeople (
+  salesman_id INT,
+  name VARCHAR(50),
+  city VARCHAR(50),
+  commission DECIMAL(3,2)
+);
+
+INSERT INTO salespeople (salesman_id, name, city, commission)
+VALUES
+  (5001, 'James Hoog', 'New York', 0.15),
+  (5002, 'Nail Knite', 'Paris', 0.13),
+  (5005, 'Pit Alex', 'London', 0.11),
+  (5006, 'Mc Lyon', 'Paris', 0.14),
+  (5007, 'Paul Adam', 'Rome', 0.13),
+  (5003, 'Lauson Hen', 'San Jose', 0.12);
+==================================================================
+
+
+SELECT *
+FROM SalesPerson;
+___________________________________________________________________________
+
+
+19. From the following table, write a SQL query to find orders that are 
+delivered by a salesperson with ID. 5001. Return ord_no, ord_date, 
+purch_amt.
+
+SELECT ord_no, ord_date, purch_amt
+FROM orders
+WHERE salesman_id = 5001;
+
+___________________________________________________________________________
+
+
+20. From the following table, write a SQL query to select a range of 
+products whose price is in the range Rs.200 to Rs.600. Begin and end 
+values are included. Return pro_id, pro_name, pro_price, and pro_com.
+
+SELECT pro_id, pro_name, pro_price, pro_com
+FROM products
+WHERE pro_price BETWEEN 200 AND 600;
+
+___________________________________________________________________________
+
+
+21. From the following table, write a SQL query to calculate the average price for a 
+manufacturer code of 16. Return avg.
+
+SELECT AVG(pro_price) AS avg
+FROM products
+WHERE pro_com = 16;
+
+___________________________________________________________________________
+
+
+22. From the following table, write a SQL query to display the pro_name as 'Item 
+Name' and pro_priceas 'Price in Rs.'  
+
+SELECT pro_name AS 'Item Name', pro_price AS 'Price in Rs.'
+FROM products;
+
+___________________________________________________________________________
+
+
+
+23. From the following table, write a SQL query to find the items whose prices are 
+higher than or equal to $250. Order the result by product price in descending, then 
+product name in ascending. Return pro_name and pro_price.
+
+SELECT pro_name, pro_price
+FROM products
+WHERE pro_price >= 250
+ORDER BY pro_price DESC, pro_name ASC;
+
+___________________________________________________________________________
+
+24. From the following table, write a SQL query to calculate average price of the 
+items for each company. Return average price and companycode.
+
+SELECT PRO_COM AS Companycode,
+Avg(PRO_PRICE) AS Average_Price
+From item_mast
+GROUP BY PRO_COM;
