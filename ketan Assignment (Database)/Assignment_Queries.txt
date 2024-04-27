@@ -13,7 +13,7 @@ CREATE TABLE Student (
     Branch VARCHAR(50)NOT NULL
 );
 
-INSERT INTO Student (Rollno, S_code, Name, Branch)
+INSERT INTO Student (Rollno, Name, Branch)
 VALUES
     (1, 'Jay', 'Computer Science'),
     (2, 'Suhani', 'Electronic and Com'),
@@ -26,11 +26,11 @@ CREATE TABLE Exam (
     Rollno INT NOT NULL,
     S_code VARCHAR(10) NOT NULL,
     Marks INT NOT NULL,
-    P_code VARCHAR(10)NOT NUL,
+    P_code VARCHAR(10)NOT NULL,
     FOREIGN KEY (Rollno) REFERENCES Student(Rollno)
 );
 
-INSERT INTO Exam (Exam, Rollno, S_code, Marks, P_code)
+INSERT INTO Exam (Rollno, S_code, Marks, P_code)
 VALUES
     (1,'CSI1',50, 'CS'),
     (1,'CS12',60, 'CS'),
@@ -46,25 +46,24 @@ ________________________________________________________________
 
 1.
 CREATE TABLE Employees (
-    Employee_id INT,
-    First_name VARCHAR(25),
-    Last_name VARCHAR(25),
-    Salary INT,
-    Joining_date DATE,
-    Department VARCHAR(255)
+    Employee_id INT PRIMARY KEY NOT NULL,
+    First_name VARCHAR(25) NOT NULL,
+    Last_name VARCHAR(25) NOT NULL,
+    Salary BIGINT NOT NULL,
+    Joining_date DATETIME,
+    Department VARCHAR(50)
 );
 
-INSERT INTO Employees (Employee_id, First_name, Last_name, 
-Salary, Joining_date, Department)
+INSERT INTO Employees (Employee_id, First_name, Last_name, Salary, Joining_date, Department)
 VALUES
- (1,"john","abraham",1000000,'01-JAN-13 12:00:00 AM',"banking"),
-(2,"micheal","clarke",800000,'01-JAN-13 12:00:00 AM',"insurance"),
-(3,"roy","thomas",700000,'01-FEB-13 12:00:00 AM',"banking"),
-(4,"tom","jose",600000,'01-FEB-13 12:00:00 AM',"insurance"),
-(5,"jerry","pinto",650000,'01-FEB-13 12:00:00 AM',"insurance"),
-(6,"philip","mathew",750000,'01-JAN-13 12:00:00 AM',"services"),
-(7,"testname1","123",650000,'01-JAN-13 12:00:00 AM',"services"),
-(8,"testname2","lname%",600000,'01-FEB-13 12:00:00 AM',"insurance");
+ (1,'john','abraham',1000000,'2013-01-01 12:00:00','banking'),
+ (2,'micheal','clarke',800000,'2013-01-01 12:00:00','insurance'),
+ (3,'roy','thomas',700000,'2013-02-01 12:00:00','banking'),
+ (4,'tom','jose',600000,'2013-02-01 12:00:00','insurance'),
+ (5,'jerry','pinto',650000,'2013-02-01 12:00:00','insurance'),
+ (6,'philip','mathew',750000,'2013-01-01 12:00:00','services'),
+ (7,'testname1','123',650000,'2013-01-01 12:00:00','services'),
+ (8,'testname2','lname%',600000,'2013-02-01 12:00:00','insurance');
 
 =========================================================================
 
@@ -78,18 +77,18 @@ CREATE TABLE Incentive (
 
 INSERT INTO Incentive (Employee_ref_id, Incentive_date, 
 Incentive_amount)
-VALUES (1, '01-FEB-13', 5000),
-       (2, '01-FEB-13', 3000),
-       (3, '01-FEB-13', 4000),
-       (1, '01-JAN-13', 4500),
-       (2, '01-JAN-13', 3500);
+VALUES (1, '2013-02-01', 5000),
+       (2, '2013-02-01', 3000),
+       (3, '2013-02-01', 4000),
+       (1, '2013-01-01', 4500),
+       (2, '2013-01-01', 3500);
 
 _________________________________________________________________________________
 
 
       Query
 
-3. Get First_Name from employee table using Tom name “Employee Name”.
+3. Get First_Name from employee table using Tom name â€œEmployee Nameâ€.
  SELECT First_name
 FROM Employees
 WHERE First_name = 'Tom';
@@ -101,7 +100,7 @@ ________________________________________________________________________
 
 
 4. Get FIRST_NAME, Joining Date, and Salary from employee table.
-SELECT First_name, Incentive_date, Salary
+SELECT First_name, Joining_date, Salary
 FROM Employees;
 
 _________________________________________________________________________
@@ -113,10 +112,10 @@ FROM Employees
 ORDER BY First_name ASC, Salary DESC;
 
 ___________________________________________________________________________
-6. Get employee detailsfromemployee table whose first name contains ‘J’.  
+6. Get employee details from employee table whose first name contains â€˜Jâ€™.  
 SELECT *
 FROM Employees
-WHERE First_name LIKE '%J%';
+WHERE First_name LIKE 'J%';
 
 ___________________________________________________________________________
 
@@ -145,20 +144,34 @@ ___________________________________________________________________________
 10. Create After Insert trigger on Employee table which insert records in 
 Viewtable
 
+
+CREATE TABLE EmployeeView (
+    Employee_id INT PRIMARY KEY,
+    First_name VARCHAR(50),
+    Last_name VARCHAR(50),
+	Salary BIGINT NOT NULL,
+	Joining_date DATETIME,
+	Department VARCHAR(50)
+);
+____________________________________________________________________________
+
 create view EmployeeView as
 select Employee_id, First_name, Last_name, Salary
 from Employees;
 
-delimiter $$
-create trigger EmployeeInsertTrigger
-after insert
-on Employee for each row
-begin
-    insert into EmployeeView (empid, firstname, lastname, salary)
-    values (new.empid, new.firstname, new.lastname, new.salary);
-end;
-$$
-delimiter ;
+
+DELIMITER $$
+
+CREATE TRIGGER InsertIntoViewTable
+AFTER INSERT
+ON Employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO viewtable (Employee_id, First_name, Last_name, Salary, Joining_date, Department)
+    VALUES (NEW.Employee_id, NEW.First_name, NEW.Last_name, NEW.Salary, NEW.Joining_date, NEW.Department);
+END$$
+
+DELIMITER ;
 
 
 ___________________________________________________________________________
@@ -167,10 +180,10 @@ ___________________________________________________________________________
 
 TABLE - 1 
 CREATE TABLE SalsePerson (
-    SNO INT PRIMARY KEY,
-    SNAME VARCHAR(255),
-    CITY VARCHAR(255),
-    COMM FLOAT
+    SNO INT PRIMARY KEY NOT NULL,
+    SNAME VARCHAR(50) NOT NULL,
+    CITY VARCHAR(50) NOT NULL,
+    COMM FLOAT NOT NULL
 );
 
 INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1001, 
@@ -187,14 +200,14 @@ INSERT INTO SalsePerson (SNO, SNAME, CITY, COMM) VALUES (1003,
 =====================================================================
 
 
-TABLE – 2
+TABLE â€“ 2
 
 CREATE TABLE Customer (
-    CNM INT PRIMARY KEY,
-    CNAME VARCHAR(50),
-    CITY VARCHAR(50),
-    RATING INT,
-    SNO INT,
+    CNM INT PRIMARY KEY NOT NULL,
+    CNAME VARCHAR(50) NOT NULL,
+    CITY VARCHAR(50) NOT NULL,
+    RATING INT NOT NULL,
+    SNO INT NOT NULL,
     FOREIGN KEY (SNO) REFERENCES SalesPerson(SNO)
 );
 
@@ -212,6 +225,9 @@ VALUES
       Query
 
 12. Retrieve the below data from above table
+	SELECT * FROM Salesperson;
+	SELECT * FROM Customer;
+
 
 
 13. All orders for more than $1000.
@@ -233,7 +249,7 @@ ___________________________________________________________________________
 
 15. All salespeople either in Barcelona or in London
 
-SELECT SNAME
+SELECT *
 FROM SalesPerson
 WHERE CITY IN ('London', 'Barcelona');
 
@@ -242,7 +258,7 @@ ___________________________________________________________________________
 16. All salespeople with commission between 0.10 and 0.12. (Boundary 
 values should be excluded).
 
-SELECT SNAME
+SELECT *
 FROM SalesPerson
 WHERE COMM > 0.10 AND COMM < 0.12;
 
@@ -250,9 +266,10 @@ ___________________________________________________________________________
 
 17. All customers excluding those with rating <= 100 unless they are located 
 in Rome
+
 SELECT *
 FROM Customer
-WHERE (RATING > 100 OR CITY = 'Rome');
+WHERE RATING <= 100 OR (RATING <= 100 AND CITY = 'Rome');
 
 ___________________________________________________________________________
 
@@ -318,7 +335,7 @@ ___________________________________________________________________________
 Name' and pro_priceas 'Price in Rs.'  
 
 SELECT pro_name AS 'Item Name', pro_price AS 'Price in Rs.'
-FROM products;
+FROM item_mas
 
 ___________________________________________________________________________
 
@@ -342,3 +359,6 @@ SELECT PRO_COM AS Companycode,
 Avg(PRO_PRICE) AS Average_Price
 From item_mast
 GROUP BY PRO_COM;
+
+
+
