@@ -89,7 +89,8 @@ ________________________________________________________________________________
       Query
 
 3. Get First_Name from employee table using Tom name “Employee Name”.
- SELECT First_name
+
+SELECT First_name AS Employee_Name
 FROM Employees
 WHERE First_name = 'Tom';
 
