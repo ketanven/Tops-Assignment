@@ -90,9 +90,8 @@ ________________________________________________________________________________
 
 3. Get First_Name from employee table using Tom name “Employee Name”.
 
-SELECT First_name AS Employee_Name
+SELECT First_name AS Tom_Name 
 FROM Employees
-WHERE First_name = 'Tom';
 
 
 
